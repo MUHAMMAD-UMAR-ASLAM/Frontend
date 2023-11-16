@@ -18,3 +18,14 @@ app.listen(3000, () => {
 })
 app.use(bodyParser.json());
 app.use("/api/user",authRouter)
+app.use((err,req,res,next)=>{
+ const statusCode=err.statusCode || 200;
+ const message=err.message;
+ return res.status(statusCode).json({
+  success:false,
+  statusCode,
+  message
+ });
+
+
+})
